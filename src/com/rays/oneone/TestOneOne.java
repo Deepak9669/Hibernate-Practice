@@ -1,37 +1,33 @@
-package com.rays.crud;
-
-import java.util.Date;
+package com.rays.oneone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.rays.user.UserDTO;
-
-public class TestSave {
+public class TestOneOne {
 
 	public static void main(String[] args) {
 
-		UserDTO dto = new UserDTO();
-		dto.setId(2);
-		dto.setFirstName("abcd");
-		dto.setLastName("ab");
-		dto.setLoginId("abc1@gmail.com");
-		dto.setPassword("1234");
-		dto.setDob(new Date());
-		dto.setAddress("indore");
+		Address empAddress = new Address();
+
+		empAddress.setId(3);
+		empAddress.setStreet("street1");
+		empAddress.setCity("indore");
+		Employee e = new Employee();
+
+		e.setId(4);
+		e.setName("abc");
+		e.setEmpAddress(empAddress);
 
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();
 
 		Session session = sf.openSession();
 
 		Transaction tx = session.beginTransaction();
-
-		session.save(dto);
+		session.save(e);
 
 		tx.commit();
-
 		session.close();
 	}
 }
